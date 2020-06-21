@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+
+char floor[5][5] = {{'1','|','2','|','3'},
+                    {'-','|','-','|','-'},
+                    {'4','|','5','|','6'},
+                    {'-','|','-','|','-'},
+                    {'7','|','8','|','9'}};
+
+char player[2] = {'X','O'};
+
+int place = 0;
+
+int tour;
+
+void wrıte(int, char);
+
+
+void floorwrıte(){
+
+    cout << endl;
+
+    for (int i = 0; i <= 4; i++) {
+        for (int j = 0; j <= 4; j++) {
+            cout << floor[i][j] << " " ;
+        }
+        cout <<  endl;
+    }
+
+    cout << endl;
+
+}
+
+void play(char player){
+
+    cout << "turn "<< player << "'de : " ;
+
+    cin >> place;
+
+    player == 'X' ? wrıte(place,'X') : wrıte(place,'O');
+
+}
+
+void wrıte(int place, char player){
+
+    switch(place){
+
+        case 1:
+            floor[0][0] = player;
+            break;
+        case 2:
+            floor[0][2] = player;
+            break;
+        case 3:
+            floor[0][4] = player;
+            break;
+        case 4:
+            floor[2][0] = player;
+            break;
+        case 5:
+            floor[2][2] = player;
+            break;
+        case 6:
+            floor[2][4] = player;
+            break;
+        case 7:
+            floor[4][0] = player;
+            break;
+        case 8:
+            floor[4][2] = player;
+            break;
+        case 9:
+            floor[4][4] = player;
+            break;
+        default:
+            cout << "falseentry !" << endl;
+            if(player == 'X') {
+                start('X');
+            }else {
+                start('Y');
+            }
+
+    }
+
+}
+
+int main(){
+
+    floorwrıte();
+
+    tour = 1;
+
+    while(tour <= 9){
+
+        start(tour%2 == 0 ? player[1] : player[0]);
+
+        floorwrıte();
+
+        tour++;
+    }
+
+    cout << "game over !" << endl;
+
+    return 0;
+}
+
